@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
+import { ThemeContext } from '../context/ThemeContext';
+import { Mail, Lock, AlertCircle, Loader2, Sun, Moon } from 'lucide-react';
 import './Login.css';
 
 const Login = () => {
@@ -10,6 +11,7 @@ const Login = () => {
   const [error, setError] = useState('');
   
   const { login, loading } = useContext(AuthContext);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -31,6 +33,13 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <button 
+        className="theme-toggle absolute-toggle" 
+        onClick={toggleTheme} 
+        aria-label="Toggle Theme"
+      >
+        {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+      </button>
       <div className="login-box glass-panel">
         <div className="login-header">
           <div className="logo-icon lg">T</div>

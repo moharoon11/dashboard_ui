@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { LayoutDashboard, Building2, Package, CalendarDays, LogOut } from 'lucide-react';
+import { ThemeContext } from '../context/ThemeContext';
+import { LayoutDashboard, Building2, Package, CalendarDays, LogOut, Sun, Moon } from 'lucide-react';
 import './DashboardLayout.css';
 
 const DashboardLayout = () => {
   const { role, logout } = useContext(AuthContext);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -66,6 +68,9 @@ const DashboardLayout = () => {
             Welcome back, {role === 'supervisor' ? 'Supervisor' : 'Admin'}!
           </div>
           <div className="user-profile">
+            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle Theme">
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
             <div className="avatar">
               {role === 'supervisor' ? 'S' : 'A'}
             </div>
